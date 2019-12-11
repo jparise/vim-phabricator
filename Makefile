@@ -4,7 +4,7 @@ all: lint test
 
 lint: .bundle/vim-vimhelplint .bundle/vim-fugitive
 	vint -s autoload ftdetect ftplugin syntax
-	vim -esN --cmd 'set rtp+=.bundle/vim-vimhelplint' \
+	vim -esN --not-a-term --cmd 'set rtp+=.bundle/vim-vimhelplint' \
 		-c 'set rtp+=.bundle/vim-fugitive' \
 		-c 'filetype plugin on' \
 		-c 'e doc/phabricator.txt' \
@@ -12,7 +12,7 @@ lint: .bundle/vim-vimhelplint .bundle/vim-fugitive
 		-c q
 
 test: .bundle/vader.vim
-	cd test && vim -Nu vimrc --not-a-term -Es -c 'Vader! */*'
+	cd test && vim -EsNu vimrc --not-a-term -c 'Vader! */*'
 
 .bundle/vim-fugitive:
 	git clone --depth 1 https://github.com/tpope/vim-fugitive .bundle/vim-fugitive
