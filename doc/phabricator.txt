@@ -1,0 +1,37 @@
+*phabricator.txt*          Phabricator plugin for Vim            *phabricator*
+
+This plugin is only available if 'compatible' is not set.
+
+INTRODUCTION                                               *phabricator-intro*
+
+This plugin provides features for interacting with Phabricator-based git
+repositories. It builds upon the foundational functionality provided by
+Fugitive (https://github.com/tpope/vim-fugitive).
+
+ * Syntax highlighting for Arcanist templates and configuration files
+ * |:Gbrowse| support for browsing Phabricator URLs from the current buffer
+ * Completion support for users and projects in Arcanist diff templates using
+   |i_CTRL-X_CTRL-O| (see |compl-omni|)
+
+CONFIGURATION                                             *phabricator-config*
+
+                                                         *g:phabricator_hosts*
+|g:phabricator_hosts|                            list of strings (default: [])
+
+  This plugin automatically recognizes Phabricator repositories served from
+  hosts named `phabricator` (eg. `phabricator.example.com`).
+
+  This variable lists additional hosts that should also be considered
+  Phabricator hosts.
+
+                                                     *g:phabricator_api_token*
+|g:phabricator_api_token|                               string (default: none)
+
+  Phabricator's Conduit API is used to generate candidates for user and
+  project completion. These API calls require an access token which can be
+  generated in Phabricator's per-user Settings interface. For example:
+
+    https://phabricator.example.com/settings/user/USERNAME/page/apitokens/
+
+------------------------------------------------------------------------------
+vim:tw=78:ft=help:norl:

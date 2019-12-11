@@ -1,0 +1,42 @@
+Given arcanistdiff (New Differential Revision):
+  Title Text                                         Overflow
+  
+  Summary:
+  Summary Line 1
+  Summary Line 2
+  
+  Test Plan: Tested all of the things.
+  
+  Reviewers: 
+  
+  Subscribers: 
+  
+  # NEW DIFFERENTIAL REVISION
+  # Describe the changes in this new revision.
+  #
+  # Included commits in branch test:
+  #
+  #         1a153a58d529 Test
+  #
+  # arc could not identify any existing revision in your working copy.
+  # If you intended to update an existing revision, use:
+  #
+  #   $ arc diff --update <revision>
+
+Execute (Title):
+  AssertEqual 'arcanistdiffTitle', SyntaxOf('Title Text')
+  AssertEqual 'arcanistdiffOverflow', SyntaxOf('Overflow')
+
+Execute (Text):
+  AssertEqual '', SyntaxOf('Tested all of the things.')
+  AssertEqual '', SyntaxOf('Summary Line 1')
+  AssertEqual '', SyntaxOf('Summary Line 2')
+
+Execute (Headings):
+  AssertEqual 'arcanistdiffHeading', SyntaxOf('Summary:')
+  AssertEqual 'arcanistdiffHeading', SyntaxOf('Test Plan:')
+  AssertEqual 'arcanistdiffHeading', SyntaxOf('Reviewers:')
+  AssertEqual 'arcanistdiffHeading', SyntaxOf('Subscribers:')
+
+Execute (Comments):
+  AssertEqual 'arcanistdiffComment', SyntaxOf('NEW DIFFERENTIAL REVISION')
