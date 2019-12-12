@@ -61,7 +61,7 @@ function! s:api_root() abort
   return api_root
 endfunction
 
-function! s:request(method, params) abort
+function! s:request(method, order, query) abort
   if !executable('curl')
     call s:throw('cURL is required')
   endif
@@ -80,9 +80,10 @@ function! s:request(method, params) abort
   call extend(args, ['-A', 'vim-phabricator'])
   call extend(args, ['-d', 'api.token=' . token])
   call extend(args, ['-d', 'queryKey=active'])
-  for [key, value] in items(a:params)
-    call extend(args, ['-d', key . '=' . value])
-  endfor
+  call extend(args, ['-d', 'order[0]=' . a:order])
+  if !empty(a:query)
+    call extend(args, ['-d', 'constraints[query]=core%3A~"' . a:query . '"'])
+  endif
   call add(args, s:api_root() . a:method)
 
   let data = system('curl ' . join(args))
@@ -99,19 +100,11 @@ function! s:request(method, params) abort
 endfunction
 
 function! phabricator#query_projects(query) abort
-  return s:request('project.search', {
-        \ 'order[0]': 'rank',
-        \ 'order[1]': 'name',
-        \ 'constraints[query]': 'core%3A~' . a:query,
-        \ })
+  return s:request('project.search', 'name', a:query)
 endfunction
 
 function! phabricator#query_users(query) abort
-  return s:request('user.search', {
-        \ 'order[0]': 'rank',
-        \ 'order[1]': 'username',
-        \ 'constraints[query]': 'core%3A~' . a:query,
-        \ })
+  return s:request('user.search', 'username', a:query)
 endfunction
 
 function! phabricator#complete(findstart, base) abort
