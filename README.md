@@ -76,9 +76,9 @@ details.
 
 * [arcanist.vim](https://github.com/solarnz/arcanist.vim) provides syntax
   highlighting for Arcanist templates and configuration files.
-* [vim-phabrowse](https://github.com/peplin/vim-phabrowse) provides a Fugitive
+* [phabrowser.vim](https://github.com/peplin/vim-phabrowse) provides a Fugitive
   browse handler for Phabricator.
-* [vim-rhubarb](https://github.com/tpope/vim-rhubarb) provides similar features
+* [rhubarb.vim](https://github.com/tpope/vim-rhubarb) provides similar features
   for GitHub-based repositories.
 * [vscode-phabricator](https://github.com/christianvuerings/vscode-phabricator)
   provides similar Phabricator features for Visual Studio Code.
