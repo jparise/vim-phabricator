@@ -61,6 +61,21 @@ function! s:api_root() abort
   return api_root
 endfunction
 
+function! s:api_token(api_root) abort
+  if exists('b:phabricator_api_token')
+    return b:phabricator_api_token
+  endif
+  try
+    let json = json_decode(join(readfile(expand('~/.arcrc')), ' '))
+    let host = get(get(json, 'hosts', {}), a:api_root, {})
+    let token = get(host, 'token', get(g:, 'phabricator_api_token'))
+  catch
+    let token = get(g:, 'phabricator_api_token')
+  endtry
+  let b:phabricator_api_token = token
+  return token
+endfunction
+
 function! s:request(method, order, query) abort
   if !executable('curl')
     call s:throw('cURL is required')
@@ -69,7 +84,11 @@ function! s:request(method, order, query) abort
     call s:throw('json_decode() is required')
   endif
 
-  let token = get(g:, 'phabricator_api_token', '')
+  let api_root = s:api_root()
+  if empty(api_root)
+    call s:throw('could not determine Conduit (API) URL')
+  endif
+  let token = s:api_token(api_root)
   if empty(token)
     call s:throw('missing API token')
   endif
@@ -84,7 +103,7 @@ function! s:request(method, order, query) abort
   if !empty(a:query)
     call extend(args, ['-d', 'constraints[query]=core%3A~"' . a:query . '"'])
   endif
-  call add(args, s:api_root() . a:method)
+  call add(args, api_root . a:method)
 
   let data = system('curl ' . join(args))
 

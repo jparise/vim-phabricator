@@ -49,6 +49,22 @@ generated in Phabricator's per-user Settings interface. For example:
 
     https://phabricator.example.com/settings/user/USERNAME/page/apitokens/
 
+The plugin will first attempt to read the per-host API token from the user's
+`~/.arcrc` configuration file. For example:
+
+```json
+{
+  "hosts": {
+    "https://secure.phabricator.com/api/": {
+      "token": "api-secrettokencharacters"
+    }
+  }
+}
+```
+
+If an API token can not be read from the `~/.arcrc` file for the current
+Phabricator host, the value stored in `g:phabricator_api_token` will be used.
+
 [conduit]: https://secure.phabricator.com/book/phabricator/article/conduit/
 
 ## License
