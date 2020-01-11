@@ -71,3 +71,14 @@ Phabricator host, the value stored in `g:phabricator_api_token` will be used.
 
 This code is released under the terms of the MIT license. See `LICENSE` for
 details.
+
+## Similar Projects
+
+* [arcanist.vim](https://github.com/solarnz/arcanist.vim) provides syntax
+  highlighting for Arcanist templates and configuration files.
+* [vim-phabrowse](https://github.com/peplin/vim-phabrowse) provides a Fugitive
+  browse handler for Phabricator.
+* [vim-rhubarb](https://github.com/tpope/vim-rhubarb) provides similar features
+  for GitHub-based repositories.
+* [vscode-phabricator](https://github.com/christianvuerings/vscode-phabricator)
+  provides similar Phabricator features for Visual Studio Code.
