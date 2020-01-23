@@ -7,7 +7,8 @@ builds upon the foundational git functionality provided by [Fugitive][].
 * Syntax highlighting for Arcanist templates and configuration files
 * `:Gbrowse` support for browsing Phabricator URLs from the current buffer
 * Completion support for users and projects in Arcanist diff templates using
-  [`<C-X><C-O>`][compl-omni] (requires [curl][] and an API token)
+  [`<C-X><C-O>`][compl-omni] (requires [curl][] and a [Conduit API][conduit]
+  token)
 
 [fugitive]: https://github.com/tpope/vim-fugitive
 [compl-omni]: http://vimdoc.sourceforge.net/htmldoc/insert.html#compl-omni
