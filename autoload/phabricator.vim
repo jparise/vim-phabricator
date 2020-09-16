@@ -170,7 +170,7 @@ function! phabricator#fugitive_url(...) abort
     return root . '/history/' . path[16:-1]
   elseif path =~# '^\.git/refs/tags/'
     return root . '/history/;' . path[15:-1]
-  elseif path =~# '^\.git\>'
+  elseif path =~# '^\.git/'
     return root
   endif
   let branch = substitute(FugitiveHead(), '/', '%252F7', 'g')
