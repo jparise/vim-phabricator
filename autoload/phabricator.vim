@@ -97,11 +97,11 @@ function! s:request(method, order, query) abort
   let args = ['-q', '--silent']
   call extend(args, ['-H', 'Accept: application/json'])
   call extend(args, ['-A', 'vim-phabricator'])
-  call extend(args, ['-d', 'api.token=' . token])
+  call extend(args, ['-d', shellescape('api.token=' . token)])
   call extend(args, ['-d', 'queryKey=active'])
-  call extend(args, ['-d', 'order[0]=' . a:order])
+  call extend(args, ['-d', shellescape('order[0]=' . a:order)])
   if !empty(a:query)
-    call extend(args, ['-d', 'constraints[query]=core%3A~"' . a:query . '"'])
+    call extend(args, ['-d', shellescape('constraints[query]=core%3A~"' . a:query . '"')])
   endif
   call add(args, api_root . a:method)
 
