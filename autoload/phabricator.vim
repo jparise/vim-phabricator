@@ -39,8 +39,10 @@ function! s:diffusion_root_for_remote(url) abort
   for host in hosts
     let host_pattern .= '\|' . escape(split(host, '://')[-1], '.')
   endfor
-  let base = matchstr(a:url, '^\%(https\=://\|git://\|git@\|ssh://code@\|ssh://git@\)\=\zs\('.host_pattern.'\)\/diffusion[/:][^/]\{-\}\ze[/:].\{-\}\%(\.git\)\=$')
+  let base = matchstr(a:url, '^\%(https\=://\|git://\|git@\|ssh://code@\|ssh://git@\)\=\zs\('.host_pattern.'\)\%(:\d\{1,5}\)\=\/diffusion[/:][^/]\{-\}\ze[/:].\{-\}\%(\.git\)\=$')
   if !empty(base)
+    " Remove the port component of the hostname.
+    let base = substitute(base, '[^/]*\zs:\d\{1,5}', '', '')
     return 'https://' . tr(base, ':', '/')
   endif
   return ''
