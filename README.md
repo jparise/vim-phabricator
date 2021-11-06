@@ -70,8 +70,8 @@ Phabricator host, the value stored in `g:phabricator_api_token` will be used.
 
 ## License
 
-This code is released under the terms of the MIT license. See `LICENSE` for
-details.
+This code is released under the terms of the MIT license.
+See [`LICENSE`](LICENSE) for details.
 
 ## Similar Projects
 
